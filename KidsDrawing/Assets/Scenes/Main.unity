@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &658132521
+--- !u!1 &104839746
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,8 +127,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 658132523}
-  - component: {fileID: 658132522}
+  - component: {fileID: 104839748}
+  - component: {fileID: 104839747}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -136,13 +136,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!20 &658132522
+--- !u!20 &104839747
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658132521}
+  m_GameObject: {fileID: 104839746}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -187,13 +187,13 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!4 &658132523
+--- !u!4 &104839748
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658132521}
+  m_GameObject: {fileID: 104839746}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -202,7 +202,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1722900400
+--- !u!1 &1947896637
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,13 +210,15 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1722900407}
-  - component: {fileID: 1722900406}
-  - component: {fileID: 1722900405}
-  - component: {fileID: 1722900404}
-  - component: {fileID: 1722900403}
-  - component: {fileID: 1722900402}
-  - component: {fileID: 1722900401}
+  - component: {fileID: 1947896646}
+  - component: {fileID: 1947896645}
+  - component: {fileID: 1947896644}
+  - component: {fileID: 1947896643}
+  - component: {fileID: 1947896642}
+  - component: {fileID: 1947896641}
+  - component: {fileID: 1947896640}
+  - component: {fileID: 1947896639}
+  - component: {fileID: 1947896638}
   m_Layer: 0
   m_Name: Drawing
   m_TagString: Untagged
@@ -224,35 +226,66 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1722900401
+--- !u!114 &1947896638
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722900400}
+  m_GameObject: {fileID: 1947896637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c99c5fcecce43f8bdc2af054cb917e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KidsDrawing.SuckInEffect
+  canvasData: {fileID: 1947896645}
+  shader: {fileID: 4800000, guid: bfa4fe77abcd2450d9a9965fdf590505, type: 3}
+  duration: 1.4
+  cellSize: 4
+--- !u!114 &1947896639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947896637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f51556dd474642e693ec96de38e267e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KidsDrawing.ArtworkArchiver
+  canvasData: {fileID: 1947896645}
+--- !u!114 &1947896640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947896637}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebd869ba82d9e48bbadb69ad60cdc931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KidsDrawing.DrawingPersistence
-  canvasData: {fileID: 1722900406}
+  canvasData: {fileID: 1947896645}
   premultiplyShader: {fileID: 4800000, guid: 7ccb1190d5c1641d39d7620c6ea1ffdf, type: 3}
   idleSecondsBeforeSave: 2
---- !u!114 &1722900402
+--- !u!114 &1947896641
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722900400}
+  m_GameObject: {fileID: 1947896637}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 452c2dac832d947ba9dfaeac08ba98aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KidsDrawing.DrawingUI
-  canvasData: {fileID: 1722900406}
-  brush: {fileID: 1722900405}
+  canvasData: {fileID: 1947896645}
+  brush: {fileID: 1947896644}
+  archiver: {fileID: 1947896639}
+  suckInEffect: {fileID: 1947896638}
   shapeShader: {fileID: 4800000, guid: 3631d66bfc88f44c7b7deccff73e7f20, type: 3}
   palette:
   - {r: 0.12941177, g: 0.12941177, b: 0.12941177, a: 1}
@@ -265,6 +298,7 @@ MonoBehaviour:
   buttonDiameterPt: 72
   buttonSpacingPt: 100
   eraserGapPt: 40
+  clearAreaWidthPt: 130
   selectedScale: 1.15
   ringGapPt: 4
   ringWidthPt: 6
@@ -274,46 +308,47 @@ MonoBehaviour:
   eraserButtonColor: {r: 1, g: 1, b: 1, a: 1}
   eraserBodyColor: {r: 0.972549, g: 0.73333335, b: 0.8156863, a: 1}
   eraserSleeveColor: {r: 0.39215687, g: 0.70980394, b: 0.9647059, a: 1}
---- !u!114 &1722900403
+  trashColor: {r: 0.47058824, g: 0.5647059, b: 0.6117647, a: 1}
+--- !u!114 &1947896642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722900400}
+  m_GameObject: {fileID: 1947896637}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27c7377060e124818b612a9f4f114ef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KidsDrawing.InputController
-  canvasData: {fileID: 1722900406}
-  painter: {fileID: 1722900404}
-  brush: {fileID: 1722900405}
---- !u!114 &1722900404
+  canvasData: {fileID: 1947896645}
+  painter: {fileID: 1947896643}
+  brush: {fileID: 1947896644}
+--- !u!114 &1947896643
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722900400}
+  m_GameObject: {fileID: 1947896637}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8173b6b1bc8334161a831560a1491aca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KidsDrawing.CanvasPainter
-  canvasData: {fileID: 1722900406}
-  displayCamera: {fileID: 658132522}
+  canvasData: {fileID: 1947896645}
+  displayCamera: {fileID: 104839747}
   brushShader: {fileID: 4800000, guid: 06c68f87ca8e94250b02347944a64d8e, type: 3}
   displayShader: {fileID: 4800000, guid: 8a5f9fa2c134b4e46a8d2848e65fa2d9, type: 3}
   backgroundColor: {r: 1, g: 1, b: 1, a: 1}
   surroundColor: {r: 0.93333334, g: 0.92156863, b: 0.9019608, a: 1}
---- !u!114 &1722900405
+--- !u!114 &1947896644
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722900400}
+  m_GameObject: {fileID: 1947896637}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcb8adaead7c1489b8cb3014ed3e0867, type: 3}
@@ -322,13 +357,13 @@ MonoBehaviour:
   color: {r: 0.95686275, g: 0.2627451, b: 0.21176471, a: 1}
   penDiameterPt: 32
   eraserDiameterPt: 64
---- !u!114 &1722900406
+--- !u!114 &1947896645
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722900400}
+  m_GameObject: {fileID: 1947896637}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e0b53ef05b0448f49c11fd99c4a39bd, type: 3}
@@ -337,13 +372,13 @@ MonoBehaviour:
   maxTextureWidth: 1024
   maxTextureHeight: 768
   toolbarHeightPt: 120
---- !u!4 &1722900407
+--- !u!4 &1947896646
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722900400}
+  m_GameObject: {fileID: 1947896637}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -356,5 +391,5 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 658132523}
-  - {fileID: 1722900407}
+  - {fileID: 104839748}
+  - {fileID: 1947896646}

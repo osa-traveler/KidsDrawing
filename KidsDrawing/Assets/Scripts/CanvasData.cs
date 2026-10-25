@@ -69,6 +69,7 @@ namespace KidsDrawing
             RenderTexture.active = Texture;
             GL.Clear(false, true, Color.clear);
             RenderTexture.active = previous;
+            MarkChanged();
         }
 
         public void MarkChanged()

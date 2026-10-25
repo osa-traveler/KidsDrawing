@@ -73,6 +73,8 @@ namespace KidsDrawing.Editor
             var input = drawing.AddComponent<InputController>();
             var ui = drawing.AddComponent<DrawingUI>();
             var persistence = drawing.AddComponent<DrawingPersistence>();
+            var archiver = drawing.AddComponent<ArtworkArchiver>();
+            var suckIn = drawing.AddComponent<SuckInEffect>();
 
             var painterSettings = new SerializedObject(painter);
             painterSettings.FindProperty("canvasData").objectReferenceValue = canvasData;
@@ -92,6 +94,8 @@ namespace KidsDrawing.Editor
             var uiSettings = new SerializedObject(ui);
             uiSettings.FindProperty("canvasData").objectReferenceValue = canvasData;
             uiSettings.FindProperty("brush").objectReferenceValue = brush;
+            uiSettings.FindProperty("archiver").objectReferenceValue = archiver;
+            uiSettings.FindProperty("suckInEffect").objectReferenceValue = suckIn;
             uiSettings.FindProperty("shapeShader").objectReferenceValue =
                 AssetDatabase.LoadAssetAtPath<Shader>("Assets/Shaders/UIShape.shader");
             uiSettings.ApplyModifiedPropertiesWithoutUndo();
@@ -101,6 +105,16 @@ namespace KidsDrawing.Editor
             persistenceSettings.FindProperty("premultiplyShader").objectReferenceValue =
                 AssetDatabase.LoadAssetAtPath<Shader>("Assets/Shaders/Premultiply.shader");
             persistenceSettings.ApplyModifiedPropertiesWithoutUndo();
+
+            var archiverSettings = new SerializedObject(archiver);
+            archiverSettings.FindProperty("canvasData").objectReferenceValue = canvasData;
+            archiverSettings.ApplyModifiedPropertiesWithoutUndo();
+
+            var suckInSettings = new SerializedObject(suckIn);
+            suckInSettings.FindProperty("canvasData").objectReferenceValue = canvasData;
+            suckInSettings.FindProperty("shader").objectReferenceValue =
+                AssetDatabase.LoadAssetAtPath<Shader>("Assets/Shaders/SuckIn.shader");
+            suckInSettings.ApplyModifiedPropertiesWithoutUndo();
 
             EditorSceneManager.SaveScene(scene, ScenePath);
             EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };

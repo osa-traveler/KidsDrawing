@@ -4,13 +4,16 @@ using UnityEngine.Rendering;
 
 namespace KidsDrawing
 {
-    // 下部ツールバー（7色パレット + 消しゴム）の表示とタップ処理。
+    // 下部ツールバー（7色パレット + 消しゴム + 右端の全部消し）の表示とタップ処理。
     // 色を選ぶとペンになるので、ペン専用のボタンは置かない。
+    // 全部消しは、絵を写真に保存してから消し、絵がボタンに吸い込まれる演出を出す。
     // 図形は角丸四角形の距離関数シェーダーで描き、テクスチャを使わない。
     public class DrawingUI : MonoBehaviour
     {
         [SerializeField] CanvasData canvasData;
         [SerializeField] BrushController brush;
+        [SerializeField] ArtworkArchiver archiver;
+        [SerializeField] SuckInEffect suckInEffect;
         [SerializeField] Shader shapeShader;
         [SerializeField] Color[] palette =
         {
@@ -27,6 +30,7 @@ namespace KidsDrawing
         [SerializeField] float buttonDiameterPt = 72f;
         [SerializeField] float buttonSpacingPt = 100f;
         [SerializeField] float eraserGapPt = 40f;
+        [SerializeField] float clearAreaWidthPt = 130f;   // 右端の全部消しボタン用に空ける幅
         [SerializeField] float selectedScale = 1.15f;
         [SerializeField] float ringGapPt = 4f;
         [SerializeField] float ringWidthPt = 6f;
@@ -38,8 +42,10 @@ namespace KidsDrawing
         [SerializeField] Color eraserButtonColor = Color.white;
         [SerializeField] Color eraserBodyColor = new Color32(0xF8, 0xBB, 0xD0, 0xFF);
         [SerializeField] Color eraserSleeveColor = new Color32(0x64, 0xB5, 0xF6, 0xFF);
+        [SerializeField] Color trashColor = new Color32(0x78, 0x90, 0x9C, 0xFF);
 
         int EraserIndex => palette.Length;
+        int ClearIndex => palette.Length + 1;
 
         Vector2[] buttonCenters;
         int selected;
@@ -117,6 +123,12 @@ namespace KidsDrawing
                 }
             }
 
+            if (nearest == ClearIndex)
+            {
+                ClearAll();
+                return;
+            }
+
             if (nearest < 0 || nearest == selected)
                 return;
             Select(nearest);
@@ -132,11 +144,21 @@ namespace KidsDrawing
                 brush.SelectColor(palette[index]);
         }
 
+        void ClearAll()
+        {
+            if (suckInEffect.IsPlaying)
+                return;
+            archiver.SaveCurrent();
+            suckInEffect.Play(buttonCenters[ClearIndex]);
+            canvasData.Clear();
+        }
+
         void LayOutButtons()
         {
-            buttonCenters = new Vector2[palette.Length + 1];
+            buttonCenters = new Vector2[palette.Length + 2];
+            float screenWidth = Screen.width / pt;
             float totalWidth = (palette.Length - 1) * buttonSpacingPt + eraserGapPt + buttonSpacingPt;
-            float x = (Screen.width / pt - totalWidth) * 0.5f;
+            float x = (screenWidth - clearAreaWidthPt - totalWidth) * 0.5f;
             float y = canvasData.ToolbarScreenRect.center.y;
             for (int i = 0; i < palette.Length; i++)
             {
@@ -144,6 +166,7 @@ namespace KidsDrawing
                 x += buttonSpacingPt;
             }
             buttonCenters[EraserIndex] = new Vector2((x + eraserGapPt) * pt, y);
+            buttonCenters[ClearIndex] = new Vector2((screenWidth - clearAreaWidthPt * 0.5f) * pt, y);
         }
 
         void RebuildMesh()
@@ -172,6 +195,11 @@ namespace KidsDrawing
                     AddCircle(center, radius, eraserButtonColor);
                     AddEraserIcon(center, radius);
                 }
+                else if (i == ClearIndex)
+                {
+                    AddCircle(center, radius, eraserButtonColor);
+                    AddTrashIcon(center, radius);
+                }
                 else
                 {
                     AddCircle(center, radius, palette[i]);
@@ -197,6 +225,18 @@ namespace KidsDrawing
             Vector2 axis = Quaternion.Euler(0f, 0f, angle) * Vector2.right;
             AddShape(center + axis * (halfLength * 0.3f), new Vector2(halfLength * 0.3f, halfHeight + 1f), 2f * pt, angle,
                 eraserSleeveColor);
+        }
+
+        // ふた付きのごみ箱
+        void AddTrashIcon(Vector2 center, float buttonRadius)
+        {
+            float unit = buttonRadius / 36f;
+            AddShape(center + new Vector2(0f, -5f) * unit, new Vector2(13f, 15f) * unit, 3f * unit, 0f, trashColor);
+            AddShape(center + new Vector2(0f, 14f) * unit, new Vector2(17f, 2.5f) * unit, 2f * unit, 0f, trashColor);
+            AddShape(center + new Vector2(0f, 18f) * unit, new Vector2(5f, 2.5f) * unit, 2f * unit, 0f, trashColor);
+            for (int i = -1; i <= 1; i++)
+                AddShape(center + new Vector2(i * 6f, -5f) * unit, new Vector2(1.2f, 10f) * unit, 1.2f * unit, 0f,
+                    eraserButtonColor);
         }
 
         void AddCircle(Vector2 center, float radius, Color color)
